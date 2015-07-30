@@ -406,6 +406,32 @@ YUITest -- JavaScript Unit Testing Framework
    :returns:   Nothing.
 
 
+Mocha -- JavaScript BDD Framework
+``````````````````````````````````````
+
+.. highlight:: html
+
+.. function:: mocha({scope})
+
+   Integrates JsHamcrest with `mocha`_.
+
+   The following code is an example of a test that could be run in Mocha::
+
+      describe('Using JsHamcrest assertions in Mocha', function() {
+         it('should succeed', function() {
+             assertThat(5, between(0).and(10), 'This assertion must succeed');
+         });
+
+         it('should fail', function() {
+             assertThat([], not(empty()), 'This assertion must fail');
+         });
+      });
+
+   :arg scope: *(Optional, default=this)* Copies all matchers to the
+               given scope.
+   :returns:   Nothing.
+
+
 .. seealso::
    :ref:`apiref`
 
@@ -417,3 +443,4 @@ YUITest -- JavaScript Unit Testing Framework
 .. _QUnit: http://docs.jquery.com/QUnit
 .. _screw-unit: http://github.com/nathansobo/screw-unit
 .. _YUITest: http://developer.yahoo.com/yui/yuitest/
+.. _mocha: http://mochajs.org/

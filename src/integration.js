@@ -285,6 +285,26 @@ JsHamcrest.Integration = (function() {
           }
         });
       };
+    },
+
+    /**
+     * Mocha integration.
+     */
+    mocha: function(params) {
+      params = params ? params : {};
+      var target = params.scope || self;
+
+      JsHamcrest.Integration.copyMembers(target);
+
+      // Assertion method exposed to Mocha.
+      target.assertThat = function(actual, matcher, message) {
+        return JsHamcrest.Operators.assert(actual, matcher, {
+          message: message,
+          fail: function(message) {
+            throw message;
+          }
+        });
+      };
     }
   };
 })();

@@ -7,8 +7,8 @@
  * Copyright (c) 2009-2013 Daniel Fernandes Martins
  * Licensed under the BSD license.
  *
- * Revision: ebcb39b1e103447f57816e8708434fa85dfd0bbf
- * Date:     Wed Nov 5 17:56:59 2014 -0200
+ * Revision: 5318a715000bb6cf4ab6734b372bacba6b33771d
+ * Date:     Thu Dec 11 14:10:33 2014 -0200
  */
 
 var JsHamcrest = {
@@ -1489,6 +1489,26 @@ JsHamcrest.Integration = (function() {
             jasmine.getEnv().currentSpec.addMatcherResult(
               new jasmine.ExpectationResult({passed:true, message:message})
             );
+          }
+        });
+      };
+    },
+
+    /**
+     * Mocha integration.
+     */
+    mocha: function(params) {
+      params = params ? params : {};
+      var target = params.scope || self;
+
+      JsHamcrest.Integration.copyMembers(target);
+
+      // Assertion method exposed to Mocha.
+      target.assertThat = function(actual, matcher, message) {
+        return JsHamcrest.Operators.assert(actual, matcher, {
+          message: message,
+          fail: function(message) {
+            throw message;
           }
         });
       };
